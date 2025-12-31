@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Happy New Year My Bubu ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#000;
+  color:white;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+/* Lock Screen */
+#lock{
+  position:fixed; inset:0;
+  background:linear-gradient(135deg,#000,#1a0010);
+  display:flex; align-items:center; justify-content:center;
+  z-index:10000;
+}
+#lock .box{
+  background:#111; padding:30px; border-radius:20px; max-width:320px;
+  box-shadow:0 0 30px rgba(255,0,100,0.7);
+}
+#lock input{
+  width:100%; padding:10px; border-radius:10px; border:none; margin:10px 0;
+  font-size:16px; text-align:center;
+}
+#lock button{
+  background:#ff2b6d; border:none; padding:10px 25px; color:white;
+  border-radius:10px; font-size:18px;
+}
+
+.header{
+  padding:30px 10px;
+  animation: glow 2s infinite;
+}
+@keyframes glow{
+  0%{text-shadow:0 0 10px #ff2b6d;}
+  50%{text-shadow:0 0 30px #ff2b6d;}
+  100%{text-shadow:0 0 10px #ff2b6d;}
+}
+
+.section{ margin-top:30px; }
+
+.card{
+  position:relative;
+  width:320px;
+  height:380px;
+  margin:20px auto;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 30px rgba(255,0,100,0.7);
+}
+.card video,.card img{
+  width:100%; height:100%; object-fit:cover;
+}
+.card img{
+  position:absolute; top:0; left:0; transition:0.5s;
+}
+
+.caption{
+  font-size:22px; color:#ff8fb7; font-weight:bold;
+}
+
+/* Hearts */
+.heart{
+  position:fixed; color:#ff2b6d; animation: float 4s linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(100vh) scale(0);}
+  50%{transform:translateY(50vh) scale(1.2);}
+  100%{transform:translateY(-10vh) scale(0);}
+}
+
+/* Ending Popup */
+#ending{
+  position:fixed; inset:0; background:rgba(0,0,0,0.9);
+  display:none; align-items:center; justify-content:center; z-index:9999;
+}
+#ending .box{
+  background:#111; padding:30px; border-radius:20px; max-width:320px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD LOCK -->
+<div id="lock">
+  <div class="box">
+    <h2 style="color:#ff8fb7;">🔐 A Secret For You</h2>
+    <p>Only my love knows the password ❤️</p>
+    <input id="pass" type="password" placeholder="Enter password">
+    <button onclick="unlock()">Open My Heart 💖</button>
+    <p id="err" style="color:#ff6b6b;"></p>
+  </div>
+</div>
+
+<audio id="bgmusic" src="WhatsApp Audio 2025-12-31 at 23.11.26.mpeg" loop></audio>
+
+<div class="header">
+  <h1>🎆 Happy New Year My Bubu ❤️</h1>
+  <h3>You are my happiest beginning and my forever ❤️</h3>
+  <button onclick="startLove()">Tap to Start Our Love Journey 💖</button>
+</div>
+
+<!-- SECTION 1 -->
+<div class="section">
+  <div class="card" onclick="toggle(1)">
+    <video id="vid1" src="WhatsApp Video 2025-12-31 at 22.19.46.mp4" loop playsinline></video>
+    <img id="img1" src="WhatsApp Image 2025-12-31 at 23.13.46.jpeg">
+  </div>
+  <div class="caption">💗 My Love 💗</div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section">
+  <div class="card" onclick="toggle(2)">
+    <video id="vid2" src="WhatsApp Video 2025-12-31 at 22.25.02.mp4" loop playsinline></video>
+    <img id="img2" src="WhatsApp Image 2025-12-31 at 23.13.47.jpeg">
+  </div>
+  <div class="caption">🧸 My Bacha 🧸</div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section">
+  <div class="card" onclick="toggle(3)">
+    <video id="vid3" src="WhatsApp Video 2025-12-31 at 22.51.59.mp4" loop playsinline></video>
+    <img id="img3" src="WhatsApp Image 2025-12-31 at 23.13.47 (1).jpeg">
+  </div>
+  <div class="caption">❤️ Mera Bubu ❤️</div>
+</div>
+
+<h2 style="margin:40px 0;">You Are My Forever ❤️</h2>
+
+<!-- Ending -->
+<div id="ending">
+  <div class="box">
+    <h2 style="color:#ff8fb7;">💖 I Love You 💖</h2>
+    <p>No matter where life takes us, my heart will always choose you. Forever ❤️</p>
+    <button onclick="closeEnding()">Always Yours 😘</button>
+  </div>
+</div>
+
+<script>
+const PASSWORD="bubu";
+let bg=document.getElementById("bgmusic");
+
+function unlock(){
+  const v=document.getElementById("pass").value.trim().toLowerCase();
+  if(v===PASSWORD){
+    document.getElementById("lock").style.display="none";
+  }else{
+    document.getElementById("err").innerText="Wrong password… try again ❤️";
+  }
+}
+
+function fadeIn(a){
+  a.volume=0; a.play();
+  let v=0, i=setInterval(()=>{ v+=0.05; a.volume=v; if(v>=1) clearInterval(i); },200);
+}
+function fadeOut(a){
+  let v=a.volume, i=setInterval(()=>{ v-=0.05; a.volume=v;
+    if(v<=0){ a.pause(); clearInterval(i); } },200);
+}
+function startLove(){ fadeIn(bg); }
+
+function stopAllVideos(){
+  for(let i=1;i<=3;i++){
+    let v=document.getElementById("vid"+i);
+    let im=document.getElementById("img"+i);
+    if(v){ v.pause(); v.currentTime=0; }
+    if(im){ im.style.opacity="1"; }
+  }
+}
+
+function toggle(n){
+  let img=document.getElementById("img"+n);
+  let vid=document.getElementById("vid"+n);
+  if(img.style.opacity=="0"){
+    img.style.opacity="1"; vid.pause(); fadeIn(bg);
+  }else{
+    stopAllVideos(); img.style.opacity="0"; fadeOut(bg); vid.play();
+    if(n===3){ setTimeout(()=>document.getElementById("ending").style.display="flex",6000); }
+  }
+}
+
+function closeEnding(){
+  document.getElementById("ending").style.display="none";
+  fadeIn(bg);
+}
+
+/* Hearts */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.innerHTML="❤️"; h.className="heart";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=Math.random()*30+10+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),4000);
+},500);
+</script>
+
+</body>
+</html>
